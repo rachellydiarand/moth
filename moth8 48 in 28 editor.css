@@ -1,0 +1,106 @@
+@font-face
+{
+	font-family: "Helvetica";
+	src: url("fonts/HelveticaNeue-02.ttf");
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+#editorHolder
+{
+	width: 1430px;
+	margin: 0 auto;
+}
+
+#editorLeftSide
+{
+	vertical-align: top;
+	position: relative;
+	width: 700px;
+	height: 905px;
+	border: 1px solid red;
+	margin-right: 15px;
+}
+
+#editorRightSide
+{
+	vertical-align: top;
+	width: 700px;
+	height: 120px;
+	border: 1px solid green;
+}
+
+#addElementDiv
+{
+	width: 400px;
+	height: 120px;
+	background-color: #ddd;
+	padding-top: 20px;
+	margin: 100px auto 0 auto;
+}
+
+.leftSideElement
+{
+	overflow: hidden;
+	position: absolute;
+	border: 1px solid green;
+}
+
+.elementTextContent
+{
+	
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.elementOverlay
+{
+	z-index: 50;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+.elementOverlaySelected
+{
+	background-color: rgba(0, 255, 0, .5);
+}
+
+.resizingHandle
+{
+	position: absolute;
+	z-index: 100;
+	border: 1px solid red;
+	width: 5px;
+	height: 5px;
+	display: none;
+}
+
+.imageTextButton
+{
+	display: inline-block;
+	width: 80px;
+	background-color: #eeeeee;
+	padding: 3px 6px;
+	text-align: center;
+}
+
+.imageTextButtonSelected
+{
+	background-color: #0c0 !important;
+	color: #fff !important;
+}
+

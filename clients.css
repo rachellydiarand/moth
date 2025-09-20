@@ -1,0 +1,444 @@
+@charset "utf-8";
+/* CSS Document */
+
+h1 {
+	font-size: 1.3em;
+}
+
+.logo
+{
+	width: 250px;
+}
+
+body {
+	font-family: consolas;
+}
+
+.noUnderline {
+	text-decoration: none;
+}
+
+.dtEst
+{
+	font-size: 11px;
+}
+
+.topRow
+{
+	border-top: none !important;
+}
+
+.bottomRow
+{
+	border-bottom: none !important;
+}
+
+.oddRow
+{
+	background-color: #f7f7f7 !important;
+}
+
+.row
+{
+	width: 100%;
+	min-height: 70px;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #333;
+	font-family: consolas;
+	background-color: #fff;
+	text-align: left;
+}
+
+.oddRowDark
+{
+	background-color: #0e0e0e !important;
+	color: green !important;
+}
+
+.oddRowDarkWhite
+{
+	background-color: #0e0e0e !important;
+	color: white !important;
+}
+
+.rowDark
+{
+	width: 100%;
+	min-height: 70px;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #333;
+	font-family: consolas;
+	background-color: black !important;
+	color: green !important;
+	text-align: left;
+}
+
+.rowDarkWhite
+{
+	width: 100%;
+	min-height: 70px;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #333;
+	font-family: consolas;
+	background-color: black !important;
+	color: white !important;
+	text-align: left;
+}
+
+.col1
+{
+	display: inline-block;
+	width: 300px;
+	text-align: left;
+	margin: 0;
+	padding: 0;
+	vertical-align: text-top;
+}
+
+.col2
+{
+	display: inline-block;
+	width: 600px;
+	text-align: left;
+	margin: 0;
+	padding: 0;
+	vertical-align: text-top;
+}
+
+.col3
+{
+	display: inline-block;
+	width: 900px;
+	text-align: left;
+	margin: 0;
+	padding: 0;
+	vertical-align: text-top;
+}
+
+.col4
+{
+	display:inline-block;
+	width: 1200px;
+	text-align: left;
+	margin: 0;
+	padding: 0;
+	vertical-align: text-top;
+}
+
+.padded2
+{
+	width: 90%;
+}
+
+.lists
+{
+	vertical-align: top;
+	font-size: 20px;
+	line-height: 1.5;
+}
+
+p
+{
+	font-size: 20px;
+	line-height: 1.5;
+}
+
+.image1
+{
+	width: 300px;
+	margin-bottom: 10px;
+}
+
+.floatLeft
+{
+	float: left;
+}
+
+.textLeft {
+	text-align: left;
+}
+
+.break {
+	clear: both;
+}
+
+.hidden {
+	display: none;
+}
+
+#lightbox
+{
+	/*position: fixed;*/
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 225px;
+}
+
+#lightboxBackground
+{
+	width: 100%;
+	height: 225px;
+	position: absolute;
+	background-color: rgba(0, 200, 200, .8);
+}
+
+#lightboxWindow
+{
+	/*position: absolute;*/
+	width: 400px;
+	height: 225px;
+	left: calc(50% - 200px);
+	top: calc(50% - 125px);
+	padding-top: 25px;
+	margin-bottom: 20px;
+	background-color: rgba(215, 215, 215, .6) !important;
+}
+
+#lightboxImage
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#lightboxImageBackground
+{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color: rgba(0, 0, 0, .8);
+}
+
+#lightboxImageWindow
+{
+	position: absolute;
+}
+
+.lightboxImageImage {
+	position: absolute;
+	max-height: 90vh;
+	max-width: 90vw;
+	left: 50vw;
+	top: 50vh;
+	margin: -45vh -45vw;
+	cursor: pointer;
+}
+
+.musicLink {
+	display: inline-block;
+	margin: 0 0 8px 0;
+	color: red;
+	cursor: pointer;
+	padding-left: 15px;
+}
+
+.musicLink:hover {
+	text-decoration:underline;
+	cursor: pointer;
+}
+
+.cherryPick {
+	display: inline-block;
+}
+
+#mp3title {
+	font-weight: bold;
+	padding-bottom: 4px;
+}
+
+.sectionHeader {
+	background-color: #0cc;
+	font-size: 28px;
+	color: #efefef;
+	font-weight: bold;
+	cursor: pointer;
+	margin-bottom: 3px;
+}
+
+.sectionHeaderText {
+	padding: 6px;
+}
+
+.imageBorder {
+	border: 1px solid #333;
+}
+
+.content {
+	display: none;
+	padding: 3px;
+	background-color: white;
+	color: #333;
+	font-weight: normal;
+	/*font-size: 20px;*/
+	cursor: auto;
+}
+
+.contentDark {
+	background-color: black !important;
+	color: green !important;
+}
+
+.contentDarkWhite {
+	background-color: black !important;
+	color: white !important;
+}
+
+button {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 3px 6px;
+}
+
+.w300 {
+	width: 300px;
+}
+
+.w50 {
+	width: 50px;
+}
+
+.stickyButton {
+	display: inline-block;
+	cursor: pointer;
+	width: auto;
+	padding: 2px 8px;
+}
+
+.stickieContent {
+	display: none;
+}
+
+.highlight {
+	background-color: yellow;
+	padding: 0 4px;
+}
+
+.highlightDark {
+	background-color: yellow;
+	color: black !important;
+	padding: 0 4px;
+}
+
+.green {
+	background-color: green;
+	color: white;
+	padding: 0 4px;
+}
+
+.normalPadding {
+	padding: 4px 8px;
+}
+
+.limeBackground {
+	background-color: #cc0 !important;
+}
+
+.imageClicker {
+	cursor: pointer;
+}
+
+#lightbox2
+{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	cursor: pointer;
+}
+
+#lightbox2Background
+{
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	background-color: rgba(0, 0, 0, .8);
+}
+
+#lightbox2Window
+{
+	position: relative;
+	padding-top: 25px;
+	max-width: 100%;
+	
+}
+
+#lightbox2ImageContainer {
+	position: relative;
+	text-align: center;
+	max-width: 100%;
+}
+
+p {
+	font-size: 20px;
+}
+
+.utubeContainer {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 56.25%;
+}
+
+.utubeIframe {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.indented {
+	margin: 4px 16px;
+	padding: 6px;
+}
+
+.indentedDark {
+	margin: 4px 16px;
+	padding: 6px;
+	background-color: #eee;
+}
+
+.darkMode {
+	background-color: black;
+	color: green;
+}
+.lightMode {
+	background-color: white;
+	color: black;
+}		
+.darkMode textarea, .darkMode input {
+	background-color: #999;
+}
+
+.lightMode textarea, .lightMode input {
+	background-color: white;
+}
+
+.aDark {
+	color: yellow;
+}
+
+.h4reducedMargin {
+	margin-top: -20px;
+}
+
+.underlineHover {
+	cursor: pointer;
+	user-select: none;
+}
+
+.consolas {
+	font-family: consolas;
+}
+
+.rightMargin8 {
+	margin: 8px;
+}
+
+#fixedToTheTopButton {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	border: 3px solid #73AD21;
+}
