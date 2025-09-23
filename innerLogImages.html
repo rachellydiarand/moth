@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>m o t h [ inner log ]</title>
+	
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=yes">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	
+	<link rel="icon" href="http://444moth.com/favicon.ico?" type="image/x-icon"></link>	
+	<link rel="stylesheet" type="text/css" href="clients.css?v=2025_06_18"></link>
+	
+	<script>
+		
+		function getAttribute(element, attributeName) {
+			attributeName = attributeName.toLowerCase();
+			var attributes = element.attributes;
+			for (var i = 0; i < attributes.length; i++) {
+				//alert(attributes[i].name);
+				if(attributes[i].name.toLowerCase() == attributeName) {
+					return attributes[i].value;
+				}
+			}
+			return "";
+		}
+		
+		function getAllAttributes(element) {
+			var str = "";
+			var attributes = element.attributes;
+			for (var i = 0; i < attributes.length; i++) {
+				str += " " + attributes[i].name + '="' + attributes[i].value + '"';
+			}
+			return str;
+		}
+
+		function reversePostOrder(parentId, childClass, startSlug, endSlug) {
+			var posts = document.getElementsByClassName(childClass);
+			if(posts.length > 0){
+				var str = "";
+				for(var a = posts.length - 1; a > -1; a--){
+					str += '<' + posts[a].nodeName + getAllAttributes(posts[a]) + '>' + posts[a].innerHTML + '</' + posts[a].nodeName + '>';
+				}
+			}
+			document.getElementById(parentId).innerHTML = '\r\n\r\n' + startSlug + '\r\n\r\n' + str + '\r\n\r\n' + endSlug + '\r\n\r\n';
+		}
+		
+		function renderImages(show) {
+			if(show) {
+				window.location = '/moth/innerLogImages.html';
+			}
+			else {
+				window.location = '/innerLog.php';
+			}
+		}
+		
+		function tagNameToCodeName(tag) {
+			return tag.split(" ").join("_");
+		}
+		
+		
+		function tagSortObj(a, b) {
+			if(a.tagDescription == b.tagDescription) {
+				return 0;
+			}
+			else
+			{
+				return (a.tagDescription < b.tagDescription ? -1 : 1);
+			}
+		}
+		
+		function getTagLinks() {
+			var posts = document.getElementsByClassName("post");
+			var innerTagPosts = document.getElementsByClassName("innerTag");
+			
+			
+			if(posts.length > 0) {				
+				var postsWithTagsArray = new Array();
+				var optionStr = "<option> </option>";
+				for(var a = 0; a < posts.length; a++) {
+					
+					if(posts[a].id == null || posts[a].id == "") continue;
+					var obj = new Object();
+					obj.id = posts[a].id;
+					obj.tagDescription = getAttribute(posts[a], 'tagDescription');
+					//alert(obj.tagDescription);
+					
+					postsWithTagsArray.push(obj);
+				}
+				if(innerTagPosts.length > 0) {
+					for(var a = 0; a < innerTagPosts.length; a++) {
+					
+						if(innerTagPosts[a].id == null || innerTagPosts[a].id == "") continue;
+						var obj = new Object();
+						obj.id = innerTagPosts[a].id;
+						obj.tagDescription = getAttribute(innerTagPosts[a], 'tagDescription');
+						//alert(obj.tagDescription);
+						
+						postsWithTagsArray.push(obj);
+					}
+				}
+				if(postsWithTagsArray.length > 0) {
+					postsWithTagsArray.sort(tagSortObj);
+					for(var a = 0; a < postsWithTagsArray.length; a++) {
+						optionStr += '<option value="' + postsWithTagsArray[a].id + '">' + postsWithTagsArray[a].tagDescription + '</option>';
+					}
+				}
+				if(optionStr != "") {
+					document.getElementById("tagSelector").innerHTML = optionStr;
+				}				
+			}
+		}
+		
+		function doTagSelectorChange() {
+			var tag = document.getElementById("tagSelector");
+			var elem = document.getElementById(tag.value);
+			//alert(tag);
+			if(elem == null) {
+				alert(tag.Value + " does not exist!");
+			}
+			elem.scrollIntoView({
+				behavior: 'smooth', // Optional: for smooth scrolling animation
+				block: 'start'      // Optional: align the top of the element with the top of the viewport
+			});
+		}
+		
+		function doScrollToTop() {
+			var elem = document.getElementById('theTop');
+			elem.scrollIntoView({
+				behavior: 'smooth', // Optional: for smooth scrolling animation
+				block: 'start'      // Optional: align the top of the element with the top of the viewport
+			});
+		}
+		
+		
+	</script>
+
+	<script type="text/javascript">
+		function drawDot(ctx, x, y, radius, color){	
+			ctx.beginPath();
+			ctx.strokeStyle = color;
+			ctx.arc(x, y, radius, 0, 2 * Math.PI, false); 
+			ctx.fillStyle = '#f00'; 
+			ctx.fill(); ctx.lineWidth = 1; 
+			ctx.strokeStyle = "#f00"; 
+			ctx.stroke(); 
+		}
+				
+		function drawLine(ctx, x1, y1, x2, y2, color) {
+			// this isn't working
+			// not my style!
+			// lets just have one draw function
+			//return;
+			// find c
+			var xDiff = x2 - x1;
+			var yDiff = y2 - y1;
+			var xx1 = x1;
+			var yy1 = y1;
+			var xx2 = x2;
+			var yy2 = y2;
+			
+			// polarity?  this is kind of odd, but you know, most people do not draw lines dot by dot these days
+			// and we want it to be pixel perfect, not sure we'll get there this first pass
+			// but we may, we'll try to make xx1 less than xx2 or we'll flip the two, so that is what this polarity? is about
+			var xPolarity = 1;
+			if(xx2 < xx1) {
+				var tempX2 = xx1;
+				xx1 = xx2;
+				xx2 = tempX2;
+				xPolarity = -1;
+			}
+			var yPolarity = 1;
+			if(yy2 < yy1) {
+				var tempY2 = yy1;
+				yy1 = yy2;
+				yy2 = tempY2;
+				yPolarity = -1;
+			}
+			
+			if(xDiff < 0) {
+				xDiff = -1 * xDiff;
+			}
+			if(yDiff < 0) {
+				yDiff = -1 * yDiff;// we could use Math.abs() but it scared me last week and I'm afraid to use it
+				//yDiff = Math.abs(yDiff);
+			}
+			
+			// c side of the triangle, the tangent
+			var c = Math.sqrt(Math.pow(x2 -x1, 2) + Math.pow(y2 - y1, 2));
+			//alert("hit");
+			var x = 0;
+			var y = 0;
+			
+			for(var a = 0; a < c; a++) {
+				x = xx1 + (xPolarity * (Math.round((a / c) * xDiff)));
+				y = yy1 + (yPolarity * (Math.round((a / c) * yDiff)));
+				drawDot(ctx, x, y, 1, color);
+				//alert(x + " : " + y);
+			}
+			
+			
+			return;
+			// Start a new Path			
+			ctx.beginPath();
+			ctx.strokeStyle = "#f00";
+			ctx.lineWidth = 1;
+			ctx.lineHeight = 1;
+			ctx.moveTo(x1, y1);
+			ctx.lineTo(x2, y2);
+
+			// Draw the Path
+			ctx.stroke();
+		}
+
+		function drawTrianglesCircles(canvasId) {
+
+			var canvas = document.getElementById(canvasId);
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+			var ctx = canvas.getContext('2d');
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			var rect = canvas.getBoundingClientRect();
+			var xN = rect.width / 2;
+			var yN = rect.height / 2;
+			var randomW = Math.round(Math.random() * xN);// half the width we'll take the center and then subtract half of this to get something in range here, could mutiply xN in the equation to increase or decrease intelligently
+			var randomH = Math.round(Math.random() * yN);// should I look up this syntax before testing?  This was the as3 way and likely the js way too.
+
+			// make points
+			var x1 = Math.round(Math.random() * randomW);
+			var y1 = Math.round(Math.random() * randomH);
+
+			var x2 = Math.round(Math.random() * randomW);
+			var y2 = Math.round(Math.random() * randomH);
+
+			var x3 = Math.round(Math.random() * randomW);
+			var y3 = Math.round(Math.random() * randomH);
+
+			// draw
+			drawDot(ctx, x1, y1, 1, "#f00");
+			drawDot(ctx, x2, y2, 1, "#f00");
+			drawDot(ctx, x3, y3, 1, "#f00");
+			
+			// ok finally success!!
+			// happy spring equinox 2025!  enjoying the day yet?
+			
+			// connect the dotz
+			// conveniently we still have the x1/y1 bit
+			//drawLine(ctx, x1, y1, x2, y2, "#06f");
+			//drawLine(ctx, x1, y1, x3, y3, "#06f");
+			//drawLine(ctx, x3, y3, x2, y2, "#06f");
+		}
+		
+		function showAudio() {
+			var emptyAudioMessage = "- audio now hidden -";
+			if(document.getElementById("audioDiv").innerHTML == "") {
+				var posts = document.getElementsByClassName("audio");
+				//var postTitles = document.getElementsByClassName("audioTitel");
+				console.log(posts.length);
+				
+				var str = "";
+				for(var a = posts.length - 1; a > -1; a--) {
+					var attributes = posts[a].attributes;
+					var title = "";
+					for(var b = 0; b < attributes.length; b++) {
+						if(attributes[b].name == "title") {
+							title = attributes[b].value;
+						}
+					}
+					str += title + "<br>" + '<' + posts[a].nodeName + getAllAttributes(posts[a]) + '>' + posts[a].innerHTML + '</' + posts[a].nodeName + '><br><br>';
+				}
+			
+				document.getElementById("audioDiv").innerHTML = '<div id="dynamicAudioContainer">' + str + '<br><br><hr><br><br></div><div id="audioHiddenMessageDiv"></div>';
+			}
+			else if(document.getElementById("audioHiddenMessageDiv") != null && document.getElementById("audioHiddenMessageDiv").innerHTML != emptyAudioMessage)
+			{
+				document.getElementById('audioHiddenMessageDiv').innerHTML = emptyAudioMessage;
+				document.getElementById('dynamicAudioContainer').style.overflow = 'hidden';
+				document.getElementById('dynamicAudioContainer').style.height = '1px';
+			}
+			else
+			{
+				document.getElementById('audioHiddenMessageDiv').innerHTML = '';
+				document.getElementById('dynamicAudioContainer').style.overflow = 'auto';
+				document.getElementById('dynamicAudioContainer').style.height = 'auto';
+			}
+		}
+
+	</script>
+	
+</head>
+
+<body style="font-family: consolas;" onload="javascript: getTagLinks();">
+
+<div id="theTop"></div>
+
+<img src="images/_largerMoth.jpg" class="imageBorder w50 floatLeft rightMargin8" /> 
+<img src="images/_largerMoth.jpg" class="imageBorder w50 floatLeft rightMargin8" /> 
+<img src="images/_largerMoth.jpg" class="imageBorder w50 floatLeft rightMargin8" /> 
+<br />
+
+<div style="clear: both;"><i>[ m o t h ]</i></div>
+
+<hr class="break" />
+<br />
+
+<h3>m o t h [ inner log ]</h3>
+<div class="indented">
+	<a href="/moth/"><i>back to main site....</i></a>
+</div>
+
+<br><br>
+
+<a target="_rlrInnerLogLink" href="/moth/bookReport.html"><i><b>Book Reports....</b></i></a> &lt;---- <i>this</i><br>
+
+<a target="_rlrInnerLogLink" href="/moth/jobs.html"><i><b>A List of approximately 5,000 jobs and careers.</b></i></a> Interesting stuff!  Trying to determine what is essential and what is not.<br>
+
+<i>* Apologies to my "old" friends. Things have obviously gotten very political with me and I'm exposing all of the stories of my interactions with them.  When I started writing my first autobiography in 2018, I came up with an intricate system for swapping out names to anonymize things for privacy.  It's way too complicated though.  I'm doing my best at spreading love about it all, because you have all been incredible to me.  But there are harsh stories and lessons to tell.  We're just doing our job, right?  My friends and I?</i>
+
+<br><br>
+
+<b><span class="highlight">This would help me a lot.  I've certainly got decades of self education in an art and a science:</span><br>
+<a href="https://academicaffairs.oregonstate.edu/faculty-and-leadership-development/recognition-and-awards/honorary-doctoral-degrees">Oregon State University Honorary Doctoral Degrees</a></b>
+<br><br>
+
+I'd teach a rad trigonometry course or even reduce it to a musical lecture.  Is that so bad?
+
+
+<br><br>
+
+<a target="_rlr" href="/moth/images/mothPeace_rachel_lydia_rand.jpg"><img src="/moth/images/mothPeace_rachel_lydia_rand_rlrx-300x128.jpg" class="imageBorder" /></a>
+
+
+
+<br><br><br>
+
+<div class="indentedDark">
+<span style="background-color: red; color: white"><b>TRIGGER WARNING:</b></span> This page contains fairly explicit sexual content.  Apparently it's a big component of future politics, as I understand it.  It's not the main focus here, but when it comes up, it can be quite sexual.  I do my best to make it brief cause there is a lot of important non-sexual politics here.  This is the moth site and not the Ms Rand site.</span>
+
+</div>
+
+<br><br><br>
+
+<hr>
+
+
+<span class="highlight"><b><i>* Images now hidden by default to reach a wider audience</i></b></span>
+
+
+
+<hr>
+
+<button type="button" onclick="javascript: reversePostOrder('logDiv', 'post', '', '');" style="cursor: pointer;">Reverse</button> | 
+<button type="button" onclick="javascript: renderImages(0);" style="cursor: pointer; background-color: green; color: white;">Hide Images</button> | 
+<button type="button" onclick="javascript: showAudio();" style="cursor: pointer;">Audio</button>
+
+<br><!-- :-) -->
+
+<hr />
+
+Goto Tag:
+<select id="tagSelector" style="min-width: 200px;" onchange="javascript: doTagSelectorChange();">
+<option value="">.. wait for the page to load 4 this ..</option>
+</select>
+
+<br />
+<hr />
+
+
+<div id="audioDiv"></div>
+
+<br><br>
+
+<div id="logDiv">
+
+
+
+<!-- log -->
+
+<div class='post'>
+<h4>2025-09-23 &nbsp;&nbsp;&nbsp;01:29:00 AM</h4>
+<a target="_rlr" href="/moth/images/IMG20250713180139.jpg"><img src="/moth/images/IMG20250713180139_rlrx-300x225.jpg" class="imageBorder" /></a><br /><br />
+<a target="_rlr" href="/moth/images/IMG20241126151000.jpg"><img src="/moth/images/IMG20241126151000_rlrx-300x225.jpg" class="imageBorder" /></a><br /><br />
+<a target="_rlr" href="/moth/images/IMG20241126151137.jpg"><img src="/moth/images/IMG20241126151137_rlrx-300x225.jpg" class="imageBorder" /></a><br /><br />
+<a target="_rlr" href="/moth/images/TSflyer.jpg"><img src="/moth/images/TSflyer_rlrx-300x85.jpg" class="imageBorder" /></a><br /><br />
+<a target="_rlr" href="/moth/images/rachelMoth2024bookBathroomPose.jpg"><img src="/moth/images/rachelMoth2024bookBathroomPose_rlrx-300x383.jpg" class="imageBorder" /></a><br /><br />
+<a target="_rlr" href="/moth/images/inonBookmarkFront.jpg"><img src="/moth/images/inonBookmarkFront_rlrx-300x85.jpg" class="imageBorder" /></a><br /><br />
+<a target="_rlr" href="/moth/images/in.png"><img src="/moth/images/in_rlrx-300x102.png" class="imageBorder" /></a><br /><br />
+<a target="_rlr" href="/moth/images/IMG20241104083528.jpg"><img src="/moth/images/IMG20241104083528_rlrx-300x225.jpg" class="imageBorder" /></a><br /><br />
+<br />
+
+
+</div>
+
+<div class='post'>
+<h4>2025-09-22 &nbsp;&nbsp;&nbsp;20:17:29 PM</h4>
+Ah, feeling a little better with this reboot here.<br>
+<br>
+Thoughts while I was resting for a few minutes.  There must be some wild men out there who would support me with my clothing list, right?  "Sure, I'll buy Rachel a dress, nylons and pink sandal heels.  And a LEGO Star Wars model!  She'll be doing here at home politics thing, all super happy that someone finally supported her and she'll post all these sexy and/or funny pictures.  Why not?"<br>
+<br>
+I've got a lot to say politically obviously, but on some level, I just need to be paid.  Sure, this clothing is fancier than jeans and a T-Shirt.  Do they make this stuff?  It's just a machine, right?  If the machine exists, then they are making it.<br>
+<br>
+Just one more thought here.  I have been wondering why these people on the streets, living in tents, are so calm?  Why are they out there?  My feelings on it are that society does not care about them.  The pushed them out there and there must be something in them with their state of despair where they think they deserve that.  Perhaps they didn't work much?  Something like that.<br>
+<br>
+When I was out there 22 years ago, I was working on re-educatiing myself massively.  No time to sit around at all.  And if I'm out there now, I'm most likely going to be so flaming mad at it that I'll just go straight to solitary confinement in jail.  I'm just not playing this game anymore.  Just like Richard Pryor in Superman III where he told Mr. Webster of Websco "I know I'm worth more to you doing things out here than in jail doing nothing for nobody."<br>
+<br>
+Whatever I'm doing at my place here, it's much, much better than having me in solitary.  In whatever country you send me to in the world.  Wherever you send me, I want a room with my instruments and computer.  If we all have to go without electric, then I'm fine with that.  But if most people have electric, then I demand that and a place to keep my gear out of the rain.  If you can't afford to support me like that, then have some guard spending 10 minutes on me a day assembling a baloney sandwich.  Or flat out kill me.  I'm done with this insanity.<br>
+<br>
+In solitary, I will of course go to court dates to defend myself.  I won't be calling a lawyer or anyone else though.  I'll ask for paper and pen.  Believe be, I've slept on the concrete plenty.<br>
+<br>
+OK, anger, frustration.  Just a little histroy lesson.  I don't know.  My food stamp EBT SNAP card has $18.10 on it to last 13 days.  I've got supplies for a couple days here.  At least I have cooking fuel now.  I closed my Dot Trombone bank account and got the $5 back from the savings account deposit for that.<br>
+<br>
+It's ridiculous.  I'm not going to be chasing or looking for a partner here.  If someone attaches themselves to me, well that may be something, but it's not going to be me doing the looking anymore.  I'm trying to keep housing, keep productive, keep electric, keep food going and get my clothing list.  I don't care about mansions.  I want clothing for my efforts.  Feminine clothing.  It seems like a bargain.  I'm not the only 55 year old who has been outmoded at work.<br>
+<br>
+I guess I'm a little frustrated with the idea of going to be hungry tonight.  Perhaps I'll splurge a little more on the snack food here.  It's no wonder people working 10 hour days hire an expert to mow their lawn.<br>
+<br></div>
+
+
+
+<div class='post'>
+<h4>2025-09-22 &nbsp;&nbsp;&nbsp;19:36:22 PM</h4>
+With my 26 year old blog and these intense politics going on right now, I have no idea how far I've reached.  It brings up the concepts of how famous musicians play in front of large audiences and travel.  They know absolutely that they have reached those people.  I'm pretty dang clueless about it all.<br>
+<br>
+I am still willing to do my solo music and political/comedy show live.  I asked for that online in the fall.  Put out an ad.  I didn't get any tangible response from that.  You can read about the way it's supposed to work in Geddy Lee's <i>My Effin' Life</i> book.  He talks about the role of a young tour manager handling all the arrangements.  It's not like the band is booking all the shows and handling the hotel and travel accomidations.  I'm doing so much to keep my politics together and move it forward.  I'm spread so thin I cannot possibly handle the social dynamics of booking gigs and there is absolutely no way I'm going to start off doing open mics.  Not my scene at all.<br>
+<br>
+Not to bring hostility.  My point in this blog reboot is to make some better boundaries about what this is all about.  I'm resolving to focus on energy politics here.  Geography.  Things of a more physical future industrialism nature.  I'm not calling for a revolution, but I am expecting one.  I don't thing there is anything anyone can do about it.  If the gas tank is empty, it's empty.  The massive cues I see in my environment and life story seem to indicate that tire rubber is the main thing we are likely to run out of and that will bring this industrialism to an end.  Mostly.<br>
+<br>
+We'll still have technology of course.  If we can massively reduce population.  Like in the shape of the Liberty Bell on the top right side, then we should be able to give an amazing life to our future generations.  It's kind of like a cliff, but there is some slope to it.<br>
+<br>
+It's likely that we grew the population for many reasons, but the top one was probably that we built the dams and although we could have had a smaller population, a lot of the hyrdoelectric power wouldn't have been utilized had we had a smaller population.  It was a thing of "We are doing it anyway, so let's have a lot of people enjoy it."  It's been an increasingly insane rat race during my lifetime, at least that is what I feel.  But it's also been crazy amazing.  And it feels like we are all going to live some amazing lives the next few decades.<br>
+<br>
+If this is all going to happen, the monetary system will be radically different.  And absolutely computerized.  I'm sure it was a massive part of the global order plan and I'm perfect for the role to lead it.  We'll need some better monetary controls than we have had to intelligently distribute the remaining industrial goods of this drawdown system.  We'll be fine.<br>
+<br>
+I do fear growing unrest about people having too much time on their hands and wanting to do something more physical, but not having any real building type supplies to do it with.  The good side of that is that there will likely be a lot of people who want to work just to have something to do.  And the people who don't want to do the more physical labor type work, will be able to just kind of kick it.  More and more so the older you are of course because life is just kinda like that.<br>
+<br>
+I think what I was suggestine years ago about some kind of draft system to sign people up for a year or two of agricultural work makes sense.  With like a year to study videos to prep for it cause we would want as few managers as possible to cut down on the transportation factore.  It's not exactly unions, right?<br>
+<br>
+Healthcare, unions, working wages.  It's all kind of a thing of the past.  Obviously healthcare will always be a big thing.  I think people depend on it too much though.  I've been tortured by excessive counseling.  We'll see where it goes.<br>
+<br>
+I could be all wrong about it and/or wrong about my involvement in it.  I simply don't know.  On some level, I'm like any outmoded 55 year old just wanting to retire in some kind of humble abode.  With my musical instruments and computer of course.<br>
+<br>
+Thoughts this afternoon of how doing the dishes with water likely uses less transportation than fast food paper wrappers.  I'd say water quality is decreasing across the board.  It's still fine for doing the dishes though.  Not sure.  Just my thoughts today.<br>
+<br>
+I could do the RV tour that I keep talking about.  I like the idea and then I'm not attached to it.  I certainly don't want to be homeless again.  It's a serious torture point for me right now.  It may just be a joke.  Just people laughing at me being scared about it.  Or some kind of social experiement on the order of Michael Jackson.  I don't know.  I've been getting increasingly hostile thoughts about it.  I'd rather be in solitary in a jail or prison than on the streets again, so having that plan is giving me a little more sanity.  I don't ever want to be in a mental hospital again.  Those places are absolutely degrading.  People getting paid good money to sit behind glass walls watching me do math and then giving me a $30,000 bill.  Never again.  I'll start fights there until they put me in solitary.  I'm not playing these games anymore.<br>
+<br>
+My little shopping list may be a little excessive, but if that clothing exists, I deserve that.  I deserve to stop being tortured.  I've worked a ton in my life and have installed copper pipe, network wires and wires from the pole.  And many more things.  If this presidency thing doesn't work out, then I want to be on SSD for a few years again.  If society is going to continue like this, then give me a few years to recover here.  I may work again.  Probably some food job part time.  I'm likely not going to go to heroics to spend SSD money on my campaign.  I'll contribute $5,000 to my Ms Rand for President to become an official 2028 candidate.  I am already an offical Principle Camapign Committee.  I don't need a state business for that.  I have my EIN and report to the FEC.  I'm not going to buy an RV with SSD money.  I'll have my apartment.  Clothing.  Electric.  Computer.  Bass and keyboard.  SP404.  Mics.  My gear.  I'll continue my blog.  I won't advertise anymore.<br>
+<br>
+If I recover and there is still no contibutions, I'll likely find a business partner through the SBA.  Someone younger to do the cooking business with.  That's the proper way to do it.  I can certainly handle the bookwork, but not the social interaction.  I can handle supply.  Help with menu formation.  Take shifts cooking.  I won't do that on my own.  I'm willing to help out like that.<br>
+<br>
+I'm no into learning agriculture here.  I'm far too spent intellectually for that.  I'd be great with leadning the computer effort as president #48 to ration our industrial output.  I've got a good bead on that.  I don't know what the timing is though.  And my heart just simply isn't with the music scene.  These musicians like Paul McCartney, Sting and others have tortured me through a few of their song lyrics.  It's all been so amazing, but there are a couple things tied heavily to my life and with my transgenderism and rejection of masculinity, I just have no love for playing music with others.  At least for the forseeable future.  If the 2026, 250 year celebration happens, I'd likely just want to stay at home and be on camera relaxing.  People can do their celebration and check in on me on their phone at will.  Whatever I'm doing at home, I'm sure I'd be at my best there.<br>
+<br>
+Again, I'm going to mostly stay out of posting about my personal life here.  Been doing that way too much lately.  People have been absusing me about it and I'm completely disgusted with humanity about that.  I assume it was all just a good work as always, so no permanent hard feelings about it.  Just doing my job over here as I understand it.<br>
+<br>
+I guess I'll "Insert Into Production" on this lengthy post and check it in the code tomorrow morning.  7:35pm now and it's time for me to get some rest.<br>
+<br>
+chow!  LR<br></div>
+<!-- end log -->
+
+<hr />
+<br />
+
+<div class='post'>
+<h4>2025-09-22 &nbsp;&nbsp;&nbsp;18:49:51 PM</h4>
+<a target="_rlr" href="/moth/images/2025-04-20_03.01.02_dt_blog_image.jpg"><img src="/moth/images/2025-04-20_03.01.02_dt_blog_image_rlrx-300x168.jpg" class="imageBorder" /></a><br /><br />
+<a target="_rlr" href="/moth/images/2025-05-16_09.47.30_dt_blog_image.jpg"><img src="/moth/images/2025-05-16_09.47.30_dt_blog_image_rlrx-300x168.jpg" class="imageBorder" /></a><br /><br />
+<br />
+
+
+</div>
+
+<div class='post'>
+<h4>2025-09-08 &nbsp;&nbsp;&nbsp;17:56:39 PM</h4>
+I do my 4 little songs a year, right?
+<br><br>
+
+</div>
+
+<div class='post'>
+<h4>2025-03-09 &nbsp;&nbsp;&nbsp;11:51:11 AM</h4>
+It's like, my life story has become a comedy to me.  There is a lot of humor in it and I've certainly been putting that spin on it lately.  But are we done with that now?  Can I have some kind of sane life again where I can do my computer, music and writing thing?  I'm having a lot of joy here coding and playing music.  I'm going to code this reverse post order button again.
+<br /><br />
+
+
+</div>
+
+<div class='post'>
+<h4>2025-03-09 &nbsp;&nbsp;&nbsp;11:28:28 AM</h4>
+This is a common thought of mine: "If people enjoy making fun of me or whatever this is, then I understand that because I like to have fun too.  I would never do this to other people.  My idea of fun is certainly different.  But I do understand fun."
+<br /><br />
+
+
+</div>
+
+
+
+<div class='post'>
+<h4>2025-03-09 &nbsp;&nbsp;&nbsp;11:22:30 AM</h4>
+I'm just in tears here again.  The idea now "It's OK Rand, just do your work."
+<br /><br />
+
+
+</div>
+
+<div class='post'>
+<h4>2025-03-09 &nbsp;&nbsp;&nbsp;10:50:00 AM</h4>
+Games.  Solitaire and arcade games.  Actually a lot of games do not have a human opponent.  Twirling a stick usually does not have a human opponent.
+<br /><br />
+
+
+</div>
+
+<div class='post'>
+<h4>2025-03-08 &nbsp;&nbsp;&nbsp;13:22:15 PM</h4>
+<a target="_rlr" href="/moth/images/lydia_balanced.jpg"><img src="/moth/images/lydia_balanced_rlrx-300x159.jpg" class="imageBorder" /></a><br /><br />
+<br />
+
+
+
+<a target="_rlr" href="/moth/images/yodaSpaceshitMeditation.jpg"><img src="/moth/images/yodaSpaceshitMeditation_rlrx-300x127.jpg" class="imageBorder" /></a><br /><br />
+
+<a target="_rlr" href="/moth/images/2024-10-08_after_hours_reharmonized.jpg"><img src="/moth/images/2024-10-08_after_hours_reharmonized_rlrx-300x315.jpg" class="imageBorder" /></a><br /><br />
+<br />
+
+
+</div>
+
+
+
+
+</div><!-- end logDiv -->
+
+<br><br><br>
+
+<hr>
+
+<br><br><br>
+
+<div>
+
+	
+<a target="_rlr" href="/moth/images/blinkies.jpg"><img src="/moth/images/blinkies_rlrx-300x258.jpg" class="imageBorder" /></a>	<br /><br />
+	<br />
+</div>
+
+<div class="break"></div>
+
+
+<br><br><br>
+
+<hr />
+
+<br /><br />
+
+
+<a target="_rlr" href="/moth/images/seeYouNextTime.jpg"><img src="/moth/images/seeYouNextTime_rlrx-300x225.jpg" class="imageBorder" /></a>
+
+<br><br>
+
+
+<br /><br />
+
+<hr />
+
+Paid for by Ms Rand for President.<br><br>
+All content created by Rachel Lydia Rand except for a couple reasonable references and some passionate music she is spiritually connected to and studies thoroughly.<br><br>
+
+<b>GitHub Licensing stuff:</b> I want to encourage people to make branches of my site.  I'be been running this stuff since 1999.  It's always been public and you can just click save as and you'd have it all.  I've never made a dime off of it.  The old css zen garden site was amazing, so please have at it.  Use my bass lines in your own work.  Just please have some respect about it and give me some credit.  Ideally buy me some of the stuff on my Amazon Shopping Lists that I share as payment.
+
+<br><br>
+
+<div id="fixedToTheTopButton">
+	<button type="button" onclick="javascript: doScrollToTop();">UP</button>
+</div>
+
+</body>
+</html>

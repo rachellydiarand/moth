@@ -55,8 +55,8 @@ This uses the collison detection that I coded in 2004.<br><br>
 		<br>
 		
 		
-		<script type="text/javascript" src="/moth/moth8 48 in 28 editorMovement.js?v=2"></script>
-		<script type="text/javascript" src="/moth/moth8 48 in 28 editor.js?v=2"></script>
+		<script type="text/javascript" src="/moth/moth8 48 in 28 editorMovement.js?v=3"></script>
+		<script type="text/javascript" src="/moth/moth8 48 in 28 editor.js?v=3"></script>
 
 		<script type="text/javascript">
 			$(document).ready(function()
@@ -67,7 +67,7 @@ This uses the collison detection that I coded in 2004.<br><br>
 				
 				//return;
 				
-				var arr = [{"x":"29px","y":"192px","w":"100px","h":"100px","image":"/images/moth48/MOTH48M.png"},{"x":"141px","y":"192px","w":"84px","h":"102px","image":"/images/moth48/MOTH48O.png"},{"x":"240px","y":"192px","w":"76px","h":"104px","image":"/images/moth48/MOTH48T.png"},{"x":"323px","y":"192px","w":"83px","h":"106px","image":"/images/moth48/MOTH48H.png"},{"x":"413px","y":"191px","w":"85px","h":"108px","image":"/images/moth48/MOTH488.png"},{"x":"540px","y":"262px","w":"34px","h":"40px","image":"/images/moth48/MOTH48C.png"},{"x":"583px","y":"261px","w":"36px","h":"42px","image":"/images/moth48/MOTH48O.png"},{"x":"625px","y":"261px","w":"38px","h":"44px","image":"/images/moth48/MOTH48M.png"},{"x":"423px","y":"90px","w":"63px","h":"92px","image":"/images/moth48/MOTH484.png"},{"x":"442px","y":"322px","w":"17px","h":"32px","image":"/images/moth48/MOTH48I.png"},{"x":"440px","y":"363px","w":"26px","h":"38px","image":"/images/moth48/MOTH48N.png"},{"x":"497px","y":"338px","w":"28px","h":"40px","image":"/images/moth48/MOTH482.png"},{"x":"535px","y":"337px","w":"30px","h":"42px","image":"/images/moth48/MOTH480.png"},{"x":"572px","y":"332px","w":"40px","h":"64px","image":"/images/moth48/MOTH482.png"},{"x":"622px","y":"324px","w":"56px","h":"94px","image":"/images/moth48/MOTH488.png"}];
+				var arr = [{"x":"29px","y":"192px","w":"100px","h":"100px","image":"/images/moth48/MOTH48M.png"},{"x":"141px","y":"192px","w":"84px","h":"102px","image":"/images/moth48/MOTH48O.png"},{"x":"240px","y":"192px","w":"76px","h":"104px","image":"/images/moth48/MOTH48T.png"},{"x":"323px","y":"192px","w":"83px","h":"106px","image":"/images/moth48/MOTH48H.png"},{"x":"413px","y":"191px","w":"85px","h":"108px","image":"/images/moth48/MOTH488.png"},{"x":"583px","y":"261px","w":"36px","h":"42px","image":"/images/moth48/MOTH48O.png"},{"x":"625px","y":"261px","w":"38px","h":"44px","image":"/images/moth48/MOTH48M.png"},{"x":"423px","y":"90px","w":"63px","h":"92px","image":"/images/moth48/MOTH484.png"},{"x":"442px","y":"322px","w":"17px","h":"32px","image":"/images/moth48/MOTH48I.png"},{"x":"440px","y":"363px","w":"26px","h":"38px","image":"/images/moth48/MOTH48N.png"},{"x":"497px","y":"338px","w":"28px","h":"40px","image":"/images/moth48/MOTH482.png"},{"x":"535px","y":"337px","w":"30px","h":"42px","image":"/images/moth48/MOTH480.png"},{"x":"572px","y":"332px","w":"40px","h":"64px","image":"/images/moth48/MOTH482.png"},{"x":"622px","y":"324px","w":"56px","h":"94px","image":"/images/moth48/MOTH488.png"}];
 				
 				for(var a = 0; a < arr.length; a++)
 				{
@@ -76,7 +76,7 @@ This uses the collison detection that I coded in 2004.<br><br>
 					$("#newElementY").val(obj.y);
 					$("#newElementWidth").val(obj.w);
 					$("#newElementHeight").val(obj.h);
-					$("#newElementLetter").val(obj.image.substring(21, 22));
+					$("#newElementLetter").val(obj.image);
 					addElement();
 					//alert("added");
 					for(var b = 0; b < 10000; b++) {

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>m o t h [ Flick Bricker ]</title>
+	
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, user-scalable=yes">
+	
+	<link rel="icon" href="https://rachellydiarand.github.io/moth/favicon.ico?" type="image/x-icon"></link>
+	
+	<link rel="stylesheet" type="text/css" href="clients.css?v=2025_05_14_2"></link>
+	
+	<style type="text/css">
+		#fb {
+			background-color: black;
+			width: 300px;
+		}		
+			
+		.fbSlide {
+			width: 300px;
+		}
+		
+		.fbDelayButton {
+			background-color: #f93;
+		}
+		
+	</style>
+	
+</head>
+
+<body class="consolas">
+
+<div style="clear: both;"><i>[ m o t h ]</i></div><br>
+<a href="/moth/"><i>.... back to moth central</i></a><br><br>
+
+<hr class="break" />
+<br />
+
+<h3>m o t h [ Flick Bricker ]</h3>
+
+download for Android (.apk):<br />
+<a href="/moth/moth/My Games/FlickBricker.apk" />FlickBricker.apk</a> - by  [ m o t h ] <i>Rachel Lydia Rand</i> &copy; 2007, 2011 (free to download, but don't steal (buy my bookie wook))<br /><br />
+
+(this page might take a while to load all the images in the png slide show.  I've fixed the server side bug in it.  -Ms Rand 2025-06-17)<br /><br />
+
+Microsecond (1 second = 1,000) Delay:<br />
+<input id="fbDelay" value="700" onchange=
+"javascript: alterDelay();" /> <button type="button" onclick="javascript: alterDelay();" class="fbDelayButton" >SET</button>
+
+<br /><br />
+
+<div id="fb">
+
+	<img id="fbImg" src="/moth/moth/My Games/Flick Bricker Show/Screenshot_2024-10-28-08-22-40-57_03a4c7f76552137a351ba7de2b875808.jpg" class="fbSlide" />
+
+</div>
+
+<script type="text/javascript">
+	var files = new Array();// []
+	var delayBetweenSlides = 700;// allow user to alter
+	var currentSlide = -1;
+	var fbInterval = -1;
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-10-28-08-22-40-57_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-10-28-08-22-42-57_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-10-28-09-44-34-59_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-02-16-23-12-72_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-02-16-23-26-16_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-12-08-36-46-37_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-12-08-36-59-67_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-13-11-03-10-46_92460851df6f172a4592fca41cc2d2e6.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-23-10-08-22-98_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-23-10-08-25-11_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-23-19-48-29-85_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-23-20-01-35-39_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-24-02-20-54-10_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-24-02-21-17-59_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-24-03-03-24-38_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-24-03-03-38-38_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-24-03-03-52-81_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-24-03-04-02-97_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-25-00-12-39-87_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-25-01-11-12-81_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-25-01-11-29-92_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-25-07-49-22-72_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-25-07-56-31-03_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-25-11-28-17-14_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-25-11-29-08-00_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-25-11-29-22-24_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-25-11-29-44-51_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-25-11-29-51-36_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-17-45-34-29_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-17-45-46-47_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-19-24-50-71_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-19-33-15-04_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-19-33-46-18_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-19-36-36-24_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-19-37-18-69_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-19-47-05-00_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-19-47-14-56_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-19-53-34-35_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-19-57-21-89_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-20-05-23-84_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-20-14-02-82_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-20-15-53-59_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-20-16-27-37_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-20-16-37-44_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-26-20-16-49-05_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-28-04-31-03-78_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-28-04-31-25-56_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-28-04-31-44-48_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-11-29-03-21-31-77_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-01-11-03-46-77_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-01-11-25-17-32_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-01-11-25-27-21_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-01-11-25-29-90_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-14-13-17-20-65_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-16-10-47-53-39_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-16-10-48-15-27_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-16-10-49-51-88_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-18-14-19-56-67_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-18-21-07-37-98_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-19-03-49-07-22_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-19-03-49-19-03_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-19-03-50-32-88_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-19-03-50-43-19_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-19-03-50-56-30_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-20-21-35-10-27_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-21-06-57-01-57_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-23-13-18-01-94_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-23-13-19-32-31_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-23-13-19-39-20_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-24-19-06-24-44_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-25-19-56-22-88_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-25-20-00-48-26_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-25-20-03-10-50_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-25-20-04-27-95_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-25-20-04-40-54_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-25-20-05-14-93_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-25-20-06-06-13_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-25-20-06-26-58_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-25-20-06-52-84_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-25-20-08-02-54_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-25-20-08-13-74_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-25-20-09-12-55_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-25-20-11-01-74_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-25-20-11-26-92_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2024-12-29-17-08-42-64_03a4c7f76552137a351ba7de2b875808.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2025-04-11-23-14-00-57_3d88d13491c3c5d191dc1c89ab1722b7.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2025-04-11-23-14-10-39_3d88d13491c3c5d191dc1c89ab1722b7.jpg");
+files.push("/moth/My Games/Flick Bricker Show/Screenshot_2025-04-11-23-14-14-57_3d88d13491c3c5d191dc1c89ab1722b7.jpg");
+
+	function alterDelay() {
+		var newDelayStr = document.getElementById("fbDelay").value;
+		var newDelay = Number(newDelayStr);
+		if(!isNaN(newDelay) && newDelay > 0) {
+			if(newDelay < 20) newDelay = 20;
+			clearInterval(fbInterval);
+			fbInterval = setInterval(fbNextSlide, newDelay);
+		}
+	}
+
+	function fbNextSlide() {
+		currentSlide++;
+		if(currentSlide > files.length - 1) {
+			currentSlide = 0;// loop
+		}
+		document.getElementById("fbImg").src = files[currentSlide];
+	}
+	
+	fbInterval = setInterval(fbNextSlide, delayBetweenSlides);
+
+</script>
+
+
+<br /><br />
+
+<hr />
+
+Paid for by Ms Rand for President.<br><br>
+All content created by Rachel Lydia Rand except for a couple reasonable references and some passionate music she is spiritually connected to and studies thoroughly.<br><br>
+
+<b>GitHub Licensing stuff:</b> I want to encourage people to make branches of my site.  I'be been running this stuff since 1999.  It's always been public and you can just click save as and you'd have it all.  I've never made a dime off of it.  The old css zen garden site was amazing, so please have at it.  Use my bass lines in your own work.  Just please have some respect about it and give me some credit.  Ideally buy me some of the stuff on my Amazon Shopping Lists that I share as payment.
+
+<br><br>
+
+</body>
+</html>

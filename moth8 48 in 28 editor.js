@@ -83,7 +83,7 @@ function addElementImage()
 	//alert("addImage()");
 	if(elementImageQ == "") return;
 	//alert('adding image....');
-	var str = '<img src="/moth/' + elementImageQ + '" style="max-height: 100%; max-width: 100%" />';
+	var str = '<img src="/moth' + elementImageQ + '" style="max-height: 100%; max-width: 100%" />';
 	$("#element-" + elementCount + "-content").append(str);
 	return;
 	$("#element-" + elementCount + "-content").css('background-image', elementImageQ);
@@ -99,8 +99,8 @@ function addElement()
 	var y = parseInt($("#newElementY").val());
 	var w = parseInt($("#newElementWidth").val());
 	var h = parseInt($("#newElementHeight").val());
-	var letter =  $("#newElementLetter").val().toUpperCase();
-	elementImageQ = '/images/moth48/MOTH48' + letter + '.png';
+	var letter =  $("#newElementLetter").val();
+	elementImageQ = (letter.length == 1 ? '/moth/images/moth48/MOTH48' + letter.toUpperCase() + '.png' : letter);
 	
 	elementCount++;
 	
